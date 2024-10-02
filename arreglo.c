@@ -6,9 +6,9 @@ int main(int argc, char *argv[]) {
   char asig[3][20];
   float nota[5][3][5];
   float prom_est=0, prom_asig=0;
+  
     //Ingreso de estudiantes
-  for( int i=0; i < 5; i++)
-  {
+  for( int i=0; i < 5; i++) { 
       // Ingresar nombres
       printf("Ingrese el nombre del estudiante %d: \n",i+1);
       scanf("%s", nombre[i]);
@@ -18,15 +18,18 @@ int main(int argc, char *argv[]) {
               printf("Ingrese el nombre de la asignatura %d: \n",j+1);
               scanf("%s", asig[j]);
               // Ingresar notas
-                          for (int k = 0; k < 5; k++) {
-                              do {
+                          for (int k = 0; k < 3; k++) {
                                   printf("Ingrese la nota %d de %s en %s (0-10): ",k+1, nombre[i], asig[j]);
                                   scanf("%f", &nota[i][j][k]);
-                              } while (nota[i][j][k] < 0 || nota[i][j][k] > 10);
+                                  if (nota[i][j][k] < 0 || nota[i][j][k] > 10){ 
+                                    printf ("Ingrese un numero entre 0  y 10\n");
+
+                                  }
+                
                           }
                       }
                   }
- //Calculo de promedios
+//Calculo de promedios
     float promE[5];
     float promA[3];
     float maxEs[5];
@@ -40,7 +43,7 @@ int main(int argc, char *argv[]) {
                 minEs[i] = 10;
                  for (int j = 0; j < 3; j++) {
                      float sumaNotas = 0;
-                     for (int k = 0; k < 5; k++) {
+                     for (int k = 0; k < 3; k++) {
                          sumaNotas += nota[i][j][k];
                          // Calcular máximas y mínimas
                          
@@ -51,18 +54,17 @@ int main(int argc, char *argv[]) {
                                  minEs[i] = nota[i][j][k];
                              }
                          }
-                     promE[i] += sumaNotas / 15; // Promedio por estudiante
-                     
-                     for (int k = 0; k < 5; k++) {
-                     promA[j] += nota[i][j][k]; // Promedio por asignatura
-                     promA[j] /= 5; 
+                     promE[i] += sumaNotas / 9; // Promedio por estudiante
+                     promA[j] += sumaNotas /3; // Promedio por asignatura
+                     promA[j] /= 3; 
+
                      // Contar aprobados
                      aprobados[j] = 0; // Reiniciar contador
-                     for (int k = 0; k < 5; k++) {
+                     for (int k = 0; k < 3; k++) {
                          if (nota[i][j][k] >= 6) {
                              aprobados[j]++;
                     }
-             }
+             
         }
     }
    
